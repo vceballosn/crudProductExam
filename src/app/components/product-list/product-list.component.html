@@ -1,0 +1,30 @@
+<h2>Listado de productos </h2>
+<ul>
+    <li *ngFor = "let product of p ">
+      {{product.id}} - {{product.elaboradoMano}} -{{product.maquina}} - {{product.status}} 
+    </li>
+</ul>
+
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Elaborado a Mano</th>
+        <th scope="col">Elaborado a maquina </th>
+        <th scope="col">Status</th>
+        <th scope="col">Fecha de Creacion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor = "let product of  p ">
+
+        <th scope="row"> {{product.id}}</th>
+        <td>{{product.elaboradoMano}}</td>
+        <td>{{product.maquina}}</td>
+        <td>{{product.status}}</td>
+        <td>{{product.dateCreation}}</td>
+      </tr>
+    </tbody>
+  </table>
