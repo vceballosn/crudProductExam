@@ -3,9 +3,10 @@
 <div class="container">
   <h2>Crear productos</h2>
 <form>
+
   <div class="mb-3">
     <label for="Elaborado a Mano" class="form-label">Elaboradoa Mano</label>
-    <input [(ngModel)]="elaboradoMano" type="text" class="form-control" id="elaboradoMano" name="elaboradoMano">
+    <input [(ngModel)]="elaboradoMano" type="text" class="form-control" id="elaboradoMano" name="elaboradoMano" pattern="[a-zA-Z]+">
   </div>
   <div class="mb-3">
     <label for="Elaborado a Maquina" class="form-label">Elaborado a Maquina</label>
@@ -15,7 +16,11 @@
       <label for="Status" class="form-label">Status</label>
       <input  [(ngModel)]="status" type="text" class="form-control" id="status" name="status">
     </div>
-   
+    <div class="mb-3">
+      <input type="date" [(ngModel)]="dateCreation">
+    </div>
+
+
     <button type="submit" class="btn btn-primary" (click) = "addProduct()">Crear</button>
   </form>
 
