@@ -1,22 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Product } from '../../product';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { ProductService } from '../../services/product.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
   selector: 'app-product-add',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,ReactiveFormsModule],
   templateUrl: './product-add.component.html',
   styleUrl: './product-add.component.css'
 })
 export class ProductAddComponent implements OnInit {
- id:number =0;
- elaboradoMano:string="";
- maquina:string="";
- status:string="";
- dateCreation:Date = new Date(); ;
+
+
+private readonly formBuilder = inject(FormBuilder)
+
+
+formGroup = this.formBuilder.nonNullable.group({
+  id:0,
+  elaboradoMano:'',
+  maquina:'',
+  status:'',
+ dateCreation :''
+
+ 
+})
+
+
+ /*formGroup = new FormGroup({ este es una manera 
+ elaboradoMano: new FormControl('') 
+  
+
+
+ });*/
 
 ngOnInit(): void {
    
@@ -27,7 +45,28 @@ ngOnInit(): void {
     
   }
   addProduct(){
-    let product = new Product(this.id,this.elaboradoMano,this.maquina,this.status,this.dateCreation);
+
+  
+
+ 
+
+
+
+    const elaboradoMano: string | undefined = this.formGroup.get("elaboradoMano")?.value ?? 'no existe';
+    const maquina:string | undefined = this.formGroup.get("maquina")?.value ?? 'no existe';
+    const status:string  | undefined = this.formGroup.get("status")?.value ?? 'no existe';
+    const dateCreation:string | undefined = this.formGroup.get("dateCreation")?.value ?? 'no existe';
+    const dateCreation1:Date = new Date(dateCreation);
+
+    //const dateCreation: Date | undefined = this.formGroup.get("dateCreation")?.value   as Date 
+
+    console.log(elaboradoMano);
+    console.log(maquina);
+    console.log(status);
+    console.log(dateCreation)
+ 
+
+   let product = new Product(elaboradoMano,maquina,status,dateCreation1);
     console.log(product);
     this.productService.createProduct(product).subscribe(
       res=> {
