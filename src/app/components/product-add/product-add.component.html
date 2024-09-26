@@ -6,7 +6,10 @@
 
   <div class="mb-3">
     <label for="Elaborado a Mano" class="form-label">Elaboradoa Mano *</label>
-    <input formControlName="elaboradoMano" type="text" class="form-control" id="elaboradoMano" name="elaboradoMano" r>
+    <input formControlName="elaboradoMano" type="text" class="form-control" id="elaboradoMano" name="elaboradoMano" >
+    <div *ngIf="formGroup.get('elaboradoMano').invalid && formGroup.get('elaboradoMano').touched">
+      <div *ngIf="formGroup.get('elaboradoMano').errors.required">Elaborado a mano es requerido.</div>
+  </div>
   </div>
   <div class="mb-3">
     <label for="Elaborado a Maquina" class="form-label">Elaborado a Maquina *</label>
@@ -21,7 +24,7 @@
       <input type="date" formControlName="dateCreation" id="dateCreation" name="dateCreation">
     </div>
     
-    <button type="submit" class="btn btn-primary" (click) = "addProduct()">Crear</button>
+    <button type="submit" [disabled]="!formGroup.valid" class="btn btn-primary" (click) = "addProduct()">Crear</button>
   </form>
 
 </div>
